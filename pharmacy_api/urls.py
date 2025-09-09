@@ -1,19 +1,19 @@
+from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from inventory import views
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.http import HttpResponse  # 👈 add this
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
-router = DefaultRouter()
-router.register('categories', views.CategoryViewSet)
-router.register('drugs', views.InventoryItemViewSet, basename='drugs')
-router.register('customers', views.CustomerViewSet)
-router.register('sales', views.SaleViewSet)
-router.register('logs', views.InventoryLogViewSet)
+# 👇 define the home view
+def home(request):
+    return HttpResponse("Welcome to Pharmacy API 🚀")
 
 urlpatterns = [
+    path('', home),  # homepage route
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    # JWT
+    path('api/', include('inventory.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

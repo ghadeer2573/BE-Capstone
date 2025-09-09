@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'inventory',
 ]
 
 MIDDLEWARE = [
@@ -120,14 +123,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-INSTALLED_APPS = [
-    # django defaults...
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_filters',
-    'inventory',
-]
 
 # REST Framework config (use SimpleJWT if you want JWT)
 REST_FRAMEWORK = {

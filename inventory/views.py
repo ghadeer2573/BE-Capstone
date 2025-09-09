@@ -69,3 +69,23 @@ class InventoryLogViewSet(viewsets.ReadOnlyModelViewSet):
         if user.is_staff:
             return self.queryset
         return self.queryset.filter(item__owner=user)
+from rest_framework import generics
+from .models import InventoryItem
+from .serializers import InventoryItemSerializer
+
+# List + Create
+class ItemListCreateView(generics.ListCreateAPIView):
+    queryset = InventoryItem.objects.all()
+    serializer_class = InventoryItemSerializer
+
+# Retrieve + Update + Delete
+class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = InventoryItem.objects.all()
+    serializer_class = InventoryItemSerializer
+from rest_framework import viewsets
+from .models import Item
+from .serializers import ItemSerializer
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
